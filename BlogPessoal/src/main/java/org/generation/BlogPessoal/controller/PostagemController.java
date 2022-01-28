@@ -32,6 +32,7 @@ public class PostagemController {
 		return ResponseEntity.ok(repository.findAll());
 	}
 
+	// Busca por ID
 	@GetMapping("/{id}")
 	public ResponseEntity<Postagem> getById(@PathVariable long id) {
 		return repository.findById(id)
@@ -39,16 +40,19 @@ public class PostagemController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 
+	// Busca por Titulo
 	@GetMapping("/titulo/{titulo}")
 	public ResponseEntity<List<Postagem>> getByTitulo(@PathVariable String titulo) {
 		return ResponseEntity.ok(repository.findAllByTituloContainingIgnoreCase(titulo));
 	}
-	//nao precisa passar o id
+	
+	// Cria uma nova postagem no banco
 	@PostMapping
 	public ResponseEntity<Postagem> postPostagem (@Valid @RequestBody Postagem postagem){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(postagem));
 	}
-	//necessario passa o id
+	
+	//Atualiza alguma postagem por meio do ID
 	@PutMapping
 	public ResponseEntity<Postagem> putPostagem (@Valid @RequestBody Postagem postagem){
 		return repository.findById(postagem.getId())
@@ -56,6 +60,7 @@ public class PostagemController {
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
+	// Deleta uma postagem por meio do ID
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deletePostagem(@PathVariable long id){
 		

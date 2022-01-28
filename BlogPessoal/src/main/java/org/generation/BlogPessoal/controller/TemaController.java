@@ -44,14 +44,27 @@ public class TemaController {
 	public ResponseEntity<Tema> post(@RequestBody Tema tema){
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
 	}
+	
 	@PutMapping
 	public ResponseEntity<Tema> put(@RequestBody Tema tema){
 		return ResponseEntity.ok(repository.save(tema));
 	}
 	
+	// Deleta uma postagem por meio do ID
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deleteTema(@PathVariable long id){
+		
+		return repository.findById(id).map(resposta -> {
+			repository.deleteById(id);
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		})
+				.orElse(ResponseEntity.notFound().build());
+	}
+	
+	/*// Deleta uma postagem por meio do ID
 	@DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
 
         repository.deleteById(id);
-    }
+    }*/
 }

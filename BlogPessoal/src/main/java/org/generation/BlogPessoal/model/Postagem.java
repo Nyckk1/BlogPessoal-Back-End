@@ -16,31 +16,34 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "postagem")
+@Table(name = "postagem") // Criando a tabela no banco de dados -- create table postagem
 public class Postagem {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id // definindo a primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // adicionando o auto increment ao ID
 	private long id;
 
 	@NotNull
-	@Size(min = 1, max = 100)
+	@Size(min = 5, max = 100, message = "O atributo título deve conter no mínimo 5 e no máximo 100 caracteres!") 
 	private String titulo;
 
 	@NotNull
-	@Size(min = 1, max = 500)
+	@Size(min = 1, max = 500, message = "O atributo título deve conter no mínimo 5 e no máximo 500 caracteres!") 
 	private String texto;
-
-	// @UpdateTimestamp
-	// private LocalDateTime date;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
 
-	@ManyToOne
+	// Defindo e configurando a Foreing Key
+	@ManyToOne // Definindo a Foreing key para - Muitos para Um
 	@JsonIgnoreProperties("postagem")
 	private Tema tema;
 
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
+
+	// Gerando todos os Geters and Seters
 	public long getId() {
 		return id;
 	}
@@ -79,6 +82,14 @@ public class Postagem {
 
 	public void setTema(Tema tema) {
 		this.tema = tema;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }
