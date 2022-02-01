@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "postagem") // Criando a tabela no banco de dados -- create table postagem
+@Table(name = "tb_postagem") // Criando a tabela no banco de dados -- create table postagem
 public class Postagem {
 
 	@Id // definindo a primary key

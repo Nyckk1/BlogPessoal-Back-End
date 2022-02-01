@@ -31,7 +31,7 @@ public class Usuario {
 	private String usuario;
 
 	@NotNull
-	@Size(min = 5, message = "A Senha deve ter no mínimo 5 caracteres")
+	@Size(min = 1, message = "A Senha deve ter no mínimo 5 caracteres")
 	private String senha;
 
 	private String foto;
@@ -39,6 +39,19 @@ public class Usuario {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+
+	
+	
+	public Usuario(long id, String nome, String usuario, String senha) {
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+	}
+	
+	public Usuario() {
+	}
+	
 
 	// Geters and Seters
 	public long getId() {
