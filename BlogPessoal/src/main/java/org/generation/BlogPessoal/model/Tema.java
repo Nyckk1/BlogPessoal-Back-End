@@ -23,7 +23,7 @@ public class Tema {
 	private long id;
 	
 	@NotBlank(message = "O atributo descrição não pode ser vazio")
-	@Size(min = 5, max = 100, message = "O atributo descrição deve conter no minimo 5 e no maximo 100 caracteres")
+	@Size(min = 3, max = 100, message = "O atributo descrição deve conter no minimo 3 e no maximo 100 caracteres")
 	private String descricao;
 	
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
